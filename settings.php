@@ -28,7 +28,7 @@ class XING_Share_Settings {
 
   public static $language_options = array(
     "en" => "English",
-    "de" => "Deutsche"
+    "de" => "Deutsch"
   );
 
   private static $defaults = array(
