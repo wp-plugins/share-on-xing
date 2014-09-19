@@ -25,27 +25,27 @@ Add a XING Share button using a shortcode inside your post or theme. The button 
 
 Optional configuration:
 
-[layout]: defines the look of the button, determined by counter position and shape. Possible values are:
+`layout`: defines the look of the button, determined by counter position and shape. Possible values are:
 
 With counters
 
-* *default-top* rectangular shape with counter balloon top
-* *square-right* square shape with counter balloon on the right
-* *default-right* rectangular shape with counter balloon the right
+* `default-top` rectangular shape with counter balloon top
+* `square-right` square shape with counter balloon on the right
+* `default-right` rectangular shape with counter balloon the right
 
 Without counters
 
-* *default*
-* *square*
-* *small_square*
+* `default`
+* `square`
+* `small_square`
 
-[lang]: defines the language in which the information shown by the button is displayed. Default value is 'en' (English), can be set to 'de' (German).
+`lang`: defines the language in which the information shown by the button is displayed. Default value is 'en' (English), can be set to 'de' (German).
 
-[url]: URL to be shared when clicking the button. Needs to be a valid URL. Current URL is used if none is provided.
+`url`: URL to be shared when clicking the button. Needs to be a valid URL. Current URL is used if none is provided.
 
 Here’s a full example:
 
-`[xing_share layout="default-top" lang="de" url="https://wordpress.org/plugins/share-on-xing/“]`
+`[xing_share layout="default-top" lang="de" url="https://wordpress.org/plugins/share-on-xing/"]`
 
 == Installation ==
 
