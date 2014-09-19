@@ -1,9 +1,9 @@
 === Share on XING ===
 Contributors: gastonsalg
 Tags: XING, share, social plugin, page, post, home, sidebar, widget, opengraph, newsfeed
-Requires at least: 3.3
+Requires at least: 4.0
 Tested up to: 4.0
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2
 License URI: license.txt
 
@@ -71,8 +71,11 @@ And always feel free to contact us!
 
 == Changelog ==
 
+= 1.0.4 =
+* Minor fixes
+
 = 1.0.3 =
-* Fixes plugin installation
+* Fixes plugin installation through WP Admin plugins manager
 
 = 1.0.2 =
 * Minor documentation improvements
