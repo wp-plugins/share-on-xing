@@ -74,7 +74,7 @@ class XING_Share_Settings {
   }
 
   function add_settings_links( $links, $file ) {
-    if ( $file === plugin_basename( dirname(__FILE__) . '/xing-share.php' ) ) {
+    if ( $file === plugin_basename( dirname(__FILE__) . '/share-on-xing.php' ) ) {
       $links[] = '<a href="' . admin_url( 'options-general.php?page=xing-share-settings' ) . '">Settings</a>';
     }
     return $links;
