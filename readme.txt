@@ -3,7 +3,7 @@ Contributors: gastonsalg
 Tags: XING, share, social plugin, page, post, home, sidebar, widget, opengraph, newsfeed
 Requires at least: 3.3
 Tested up to: 4.0
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2
 License URI: license.txt
 
@@ -43,6 +43,10 @@ Without counters
 
 [url]: URL to be shared when clicking the button. Needs to be a valid URL. Current URL is used if none is provided.
 
+Here’s a full example:
+
+`[xing_share layout="default-top" lang="de" url="https://wordpress.org/plugins/share-on-xing/“]`
+
 == Installation ==
 
 1. Install the plugin either via the WordPress.org plugin directory, or by uploading the files to your server (in the `/wp-content/plugins/` directory).
@@ -66,6 +70,12 @@ And always feel free to contact us!
 2. XING Share applied on a post
 
 == Changelog ==
+
+= 1.0.1 =
+* Minor documentation improvements
+
+= 1.0.1 =
+* Minor documentation improvements
 
 = 1.0 =
 * Initial launch
