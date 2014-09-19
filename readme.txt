@@ -30,7 +30,7 @@ Add a XING Share button using a shortcode inside your post or theme. The button 
 
 Optional configuration:
 
-`layout` defines the look of the button, determined by counter position and shape. Possible values are:
+The `layout` option defines the look of the button, determined by counter position and shape. Possible values are:
 
 With counters
 
@@ -44,9 +44,9 @@ Without counters
 * `square`
 * `small_square`
 
-`lang` defines the language in which the information shown by the button is displayed. Default value is 'en' (English), can be set to 'de' (German).
+The `lang` option defines the language in which the information shown by the button is displayed. Default value is `en` (English), can be set to `de` (German).
 
-`url` URL to be shared when clicking the button. Needs to be a valid URL. Current URL is used if none is provided.
+The `url` option defines the URL to be shared when clicking the button. Needs to be a valid URL. Current URL is used if none is provided.
 
 Here’s a full example:
 
