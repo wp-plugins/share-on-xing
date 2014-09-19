@@ -7,7 +7,7 @@ Stable tag: 1.0.6
 License: GPLv2
 License URI: license.txt
 
-Embeds the XING Share button on your Wordpress website without any hassle. Allow your visitors to share your content on their XING newsfeed.
+Embed the XING Share button on your Wordpress website without any hassle. Allow your visitors to share your content on their XING newsfeed.
 
 == Description ==
 
