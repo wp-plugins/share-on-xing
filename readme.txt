@@ -52,6 +52,11 @@ Here’s a full example:
 
 `[xing_share layout="default-top" lang="de" url="https://wordpress.org/plugins/share-on-xing/"]`
 
+= Contributing =
+
+The source code of this plugin can be found on this [GitHub account](https://github.com/gastonsalg/share-on-xing.git).
+Pull requests, code discussions and features requests are more than welcome!
+
 == Installation ==
 
 1. Install the plugin either via the WordPress.org plugin directory, or by uploading the files to your server (in the `/wp-content/plugins/` directory).
