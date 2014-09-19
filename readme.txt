@@ -3,7 +3,7 @@ Contributors: gastonsalg
 Tags: XING, share, social plugin, page, post, home, sidebar, widget, opengraph, newsfeed
 Requires at least: 4.0
 Tested up to: 4.0
-Stable tag: 1.0.6
+Stable tag: 1.0.7
 License: GPLv2
 License URI: license.txt
 
@@ -80,6 +80,9 @@ And always feel free to contact us!
 2. XING Share applied on a post
 
 == Changelog ==
+
+= 1.0.7 =
+* Fixes default layout setting
 
 = 1.0.6 =
 * Consistent versioning

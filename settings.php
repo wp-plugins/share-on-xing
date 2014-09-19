@@ -33,7 +33,7 @@ class XING_Share_Settings {
 
   private static $defaults = array(
     'position' => 'before',
-    'layout' => 'no_count-default',
+    'layout' => 'default',
     'language' => 'en'
   );
 
