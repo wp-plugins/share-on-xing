@@ -1,0 +1,59 @@
+.form-table td fieldset label {
+  margin-right: 0.5em!important
+}
+
+.xing-share-layout-options {
+  width: 370px;
+}
+
+.xing-share-layout-option input {
+  display: none;
+}
+
+.xing-share-layout-option,
+.xing-share-layout-option label {
+  display: inline-block;
+  height: 110px;
+  width: 110px;
+}
+
+.xing-share-layout-option {
+  background: #fff url(../img/xing_share_layouts.png) no-repeat 0 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+  -webkit-transition: box-shadow 0.5s;
+           transition: box-shadow 0.5s;
+}
+
+.form-table td fieldset .xing-share-layout-option label {
+  margin: 0!important;
+  overflow: hidden;
+  text-indent: 200%;
+  white-space: nowrap;
+}
+
+.xing-share-layout-option.selected {
+  box-shadow: 0 0 3px #000 inset;
+}
+
+.xing-share-layout-option.default-top {
+  background-position: -550px 0;
+}
+
+.xing-share-layout-option.square-right {
+  background-position: -440px 0;
+}
+
+.xing-share-layout-option.default-right {
+  background-position: -330px 0;
+}
+
+.xing-share-layout-option.square {
+  background-position: -220px 0;
+}
+
+.xing-share-layout-option.small_square {
+  background-position: -110px 0;
+}
