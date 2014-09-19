@@ -3,7 +3,7 @@ Contributors: gastonsalg
 Tags: XING, share, social plugin, page, post, home, sidebar, widget, opengraph, newsfeed
 Requires at least: 3.3
 Tested up to: 4.0
-Stable tag: 1.0
+Stable tag: 1.0.1
 License: GPLv2
 License URI: license.txt
 
@@ -25,23 +25,23 @@ Add a XING Share button using a shortcode inside your post or theme. The button 
 
 Optional configuration:
 
-[layout:] defines the look of the button, determined by counter position and shape. Possible values are:
+[layout]: defines the look of the button, determined by counter position and shape. Possible values are:
 
 With counters
 
-* [default-top] rectangular shape with counter balloon top
-* [square-right] square shape with counter balloon on the right
-* [default-right] rectangular shape with counter balloon the right
+* *default-top* rectangular shape with counter balloon top
+* *square-right* square shape with counter balloon on the right
+* *default-right* rectangular shape with counter balloon the right
 
 Without counters
 
-* [default]
-* [square]
-* [small_square]
+* *default*
+* *square*
+* *small_square*
 
-[lang:] defines the language in which the information shown by the button is displayed. Default value is 'en' (English), can be set to 'de' (German).
+[lang]: defines the language in which the information shown by the button is displayed. Default value is 'en' (English), can be set to 'de' (German).
 
-[url:] URL to be shared when clicking the button. Needs to be a valid URL. Current URL is used if none is provided.
+[url]: URL to be shared when clicking the button. Needs to be a valid URL. Current URL is used if none is provided.
 
 == Installation ==
 
@@ -51,13 +51,14 @@ Without counters
 
 == Frequently Asked Questions ==
 
-= Why is there no content shown on the preview when sharing? How do I customize what is shared?
+= Why is there no content shown on the preview when sharing? How do I customize what is shared? =
 
 The XING Share button uses the Open Graph tags on your page header to gather the title, the description and an image (if any) and use them to build the shared item. If these are not present, no information will be shown within the preview. There are several plugins which might help you setting the Open Graphs tag headers properly.
 
-= Further questions?
+= Further questions? =
 
-You might find more information about the XING Share button and other plugins
+You will find more information about the XING Share button and other plugins in the official [Developer Portal](https://dev.xing.com/).
+And always feel free to contact us!
 
 == Screenshots ==
 
