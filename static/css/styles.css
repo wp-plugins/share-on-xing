@@ -1,0 +1,10 @@
+.xing-share-bar {
+  color: #666;
+  margin: 0.3em 0 0.6em;
+  font-style: italic;
+}
+
+.xing-share-bar > div {
+  margin-left: 0.3em;
+  vertical-align: text-bottom;
+}
