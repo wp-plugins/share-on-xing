@@ -1,7 +1,7 @@
 === Share on XING ===
 Contributors: gastonsalg
 Tags: XING, share, social plugin, page, post, home, sidebar, widget, opengraph, newsfeed
-Requires at least: 4.0
+Requires at least: 3.3
 Tested up to: 4.0
 Stable tag: 1.0.7
 License: GPLv2
