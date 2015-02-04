@@ -18,7 +18,6 @@ class XING_Share_Settings {
   );
 
   public static $layout_options = array(
-    "default" => "Legacy",
     "share-right" => "\"Share\" label with counter on the right",
     "share-top" => "\"Share\" label with counter on top",
     "share" => "\"Share\" label with no counter",
