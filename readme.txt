@@ -1,9 +1,9 @@
 === Share on XING ===
 Contributors: gastonsalg
 Tags: XING, share, social plugin, page, post, home, sidebar, widget, opengraph, newsfeed
-Requires at least: 3.3
-Tested up to: 4.0
-Stable tag: 1.0.7
+Requires at least: 3.4
+Tested up to: 4.1
+Stable tag: 1.0.8
 License: GPLv2
 License URI: license.txt
 
@@ -34,15 +34,18 @@ The `layout` option defines the look of the button, determined by counter positi
 
 With counters
 
-* `default-top` rectangular shape with counter balloon top
-* `square-right` square shape with counter balloon on the right
-* `default-right` rectangular shape with counter balloon the right
+* `share-top` rectangular shape, "Share"/"Teilen" labeled, with counter balloon on top
+* `share-right` rectangular shape, "Share"/"Teilen" labeled, with counter balloon on the right
+* `xing-top` rectangular shape, "XING" labeled, with counter balloon on top
+* `xing-right` rectangular shape, "XING" labeled, with counter balloon on the right
+* `square-top` square shape, no label, with counter balloon on top
+* `square-right` square shape, no label, with counter balloon on the right
 
 Without counters
 
-* `default`
-* `square`
-* `small_square`
+* `share` rectangular shape, "Share"/"Teilen" labeled
+* `xing` rectangular shape, "XING" labeled
+* `square` square shape, no label
 
 The `lang` option defines the language in which the information shown by the button is displayed. Default value is `en` (English), can be set to `de` (German).
 
@@ -81,6 +84,11 @@ And always feel free to contact us!
 
 == Changelog ==
 
+= 1.0.8 =
+* Implements the new XING Share Button
+* Extends plugin configuration options to support new plugin features
+* Fixes Settings page on older Wordpress versions
+
 = 1.0.7 =
 * Fixes default layout setting
 
@@ -100,4 +108,4 @@ And always feel free to contact us!
 * Minor documentation improvements
 
 = 1.0 =
-* Initial launch
+* Initial release

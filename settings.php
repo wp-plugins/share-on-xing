@@ -18,12 +18,15 @@ class XING_Share_Settings {
   );
 
   public static $layout_options = array(
-    "default-right"  => "Rectangular with counter on the right",
-    "square-right" => "Square with counter on the right",
-    "default-top" => "Rectangular with counter on top",
-    "default" => "Rectangular with no counter",
+    "share" => "Rectangular with no counter",
+    "share-top" => "Rectangular with counter on top",
+    "share-right" => "Rectangular with counter on the right",
+    "xing" => "Rectangular with no counter",
+    "xing-top" => "Rectangular with counter on top",
+    "xing-right" => "Rectangular with counter on the right",
     "square"  => "Square with no counter",
-    "small_square" => "Small square with no counter"
+    "square-top" => "Square with counter on top",
+    "square-right" => "Square with counter on the right"
   );
 
   public static $language_options = array(
@@ -33,7 +36,7 @@ class XING_Share_Settings {
 
   private static $defaults = array(
     'position' => 'before',
-    'layout' => 'default',
+    'layout' => 'xing',
     'language' => 'en'
   );
 
@@ -42,9 +45,12 @@ class XING_Share_Settings {
   */
   public function init()
   {
-    add_action( 'admin_menu', array( 'XING_Share_Settings', 'add_plugin_page' ) );
-    add_action( 'admin_init', array( 'XING_Share_Settings', 'page_init' ) );
-    add_filter( 'plugin_action_links', array( 'XING_Share_Settings', 'add_settings_links'), 10, 2 );
+    add_action( 'admin_menu', array( XING_Share_Settings, 'add_plugin_page' ) );
+    add_action( 'admin_init', array( XING_Share_Settings, 'page_init' ) );
+
+    add_filter( 'plugin_action_links', array( XING_Share_Settings, 'add_settings_links'), 10, 2 );
+
+    self::$options = get_option( 'xing_share' );
   }
 
   /**
@@ -52,28 +58,37 @@ class XING_Share_Settings {
   */
   public function add_plugin_page()
   {
+    global $xing_share_settings_page;
+
     // This page will be under "Settings"
-    $page = add_options_page(
+    $xing_share_settings_page = add_options_page(
       'Share on XING settings',
       'Share on XING',
       'manage_options',
       'xing-share-settings',
-      array( 'XING_Share_Settings', 'create_admin_page' )
+      array( XING_Share_Settings, 'create_admin_page' )
     );
 
-    add_action( 'admin_print_scripts-' . $page, array( 'XING_Share_Settings', 'xing_share_settings_scripts' ) );
-    add_action( 'admin_print_styles-' . $page, array( 'XING_Share_Settings', 'xing_share_settings_styles' ) );
+    add_action( 'admin_enqueue_scripts', array( XING_Share_Settings, 'xing_share_settings_static_files' ) );
+
+    add_action('load-' . $xing_share_settings_page, array( XING_Share_Settings, 'display_legacy_configuration_detected_notice' ));
   }
 
-  public function xing_share_settings_scripts() {
-    wp_enqueue_script( 'xing-share-settings-scripts' );
-  }
+  public function xing_share_settings_static_files($hook) {
+    global $xing_share_settings_page;
 
-  public function xing_share_settings_styles() {
-    wp_enqueue_style( 'xing-share-settings-styles' );
+    if ($hook == $xing_share_settings_page) {
+      wp_register_script( 'xing-share-settings-javascripts', plugins_url( 'static/js/settings.js', __FILE__ ), ['jquery'] );
+      wp_register_style( 'xing-share-settings-styles', plugins_url( 'static/css/settings.css', __FILE__ ) );
+
+      wp_enqueue_script( 'xing-share-settings-javascripts' );
+      wp_enqueue_style( 'xing-share-settings-styles' );
+    }
   }
 
   function add_settings_links( $links, $file ) {
+    global $xing_share_settings_page;
+
     if ( $file === plugin_basename( dirname(__FILE__) . '/share-on-xing.php' ) ) {
       $links[] = '<a href="' . admin_url( 'options-general.php?page=xing-share-settings' ) . '">Settings</a>';
     }
@@ -83,9 +98,7 @@ class XING_Share_Settings {
   /**
   * Options page callback
   */
-  public function create_admin_page()
-  {
-    self::$options = get_option( 'xing_share' ); ?>
+  public function create_admin_page() { ?>
     <div class="wrap">
       <h2>Share on XING</h2>
       <p>Allow your visitors share your posts and pages on their XING newsfeed with one click.</p>
@@ -102,26 +115,24 @@ class XING_Share_Settings {
   }
 
   public function page_init() {
-    wp_register_script( 'xing-share-settings-scripts', plugins_url( 'static/js/settings.js', __FILE__ ), ['jquery-core'] );
-    wp_register_style( 'xing-share-settings-styles', plugins_url( 'static/css/settings.css', __FILE__ ) );
 
     register_setting(
       'xing_share_options', // Option group
       'xing_share', // Option name
-      array( 'XING_Share_Settings', 'sanitize' )
+      array( XING_Share_Settings, 'sanitize' )
     );
 
     add_settings_section(
       'xing_share_general', // ID
       null, // Title
-      null, // Callback
+      function() { return; }, // Callback
       'xing-share-settings' // Page
     );
 
     add_settings_field(
       'xing_share_display_on', // ID
       'Display on', // Title
-      array( 'XING_Share_Settings', 'xing_share_display_on_callback' ), // Callback
+      array( XING_Share_Settings, 'xing_share_display_on_callback' ), // Callback
       'xing-share-settings', // Page
       'xing_share_general' // Section
     );
@@ -129,7 +140,7 @@ class XING_Share_Settings {
     add_settings_field(
       'xing_share_position',
       'Position',
-      array( 'XING_Share_Settings', 'xing_share_position_callback' ),
+      array( XING_Share_Settings, 'xing_share_position_callback' ),
       'xing-share-settings',
       'xing_share_general'
     );
@@ -137,7 +148,7 @@ class XING_Share_Settings {
     add_settings_field(
       'xing_share_layout',
       'Button layout',
-      array( 'XING_Share_Settings', 'xing_share_layout_callback' ),
+      array( XING_Share_Settings, 'xing_share_layout_callback' ),
       'xing-share-settings',
       'xing_share_general'
     );
@@ -145,7 +156,7 @@ class XING_Share_Settings {
     add_settings_field(
       'xing_share_language',
       'Language',
-      array( 'XING_Share_Settings', 'xing_share_language_callback' ),
+      array( XING_Share_Settings, 'xing_share_language_callback' ),
       'xing-share-settings',
       'xing_share_general'
     );
@@ -153,7 +164,7 @@ class XING_Share_Settings {
     add_settings_field(
       'xing_share_label',
       'Label',
-      array( 'XING_Share_Settings', 'xing_share_label_callback' ),
+      array( XING_Share_Settings, 'xing_share_label_callback' ),
       'xing-share-settings',
       'xing_share_general'
     );
@@ -193,7 +204,7 @@ class XING_Share_Settings {
   public function xing_share_layout_callback()
   {
     if ( ! isset( self::$options['layout'] ) )
-      self::$options['layout'] = self::$defaults['layout'];; ?>
+      self::$options['layout'] = self::$defaults['layout']; ?>
     <fieldset>
         <ul class="xing-share-layout-options"><?php
           foreach ( self::$layout_options as $layout => $description ) {
@@ -221,7 +232,7 @@ class XING_Share_Settings {
     <fieldset><?php
       foreach ( self::$language_options as $lang => $label ) {
         printf(
-          '<label><input type="radio" value="%s" %s name="xing_share[language]">%s</label>',
+          '<label><input type="radio" class="xing-share-language-option" value="%s" %s name="xing_share[language]">%s</label>',
           $lang,
           ( self::$options['language'] == $lang ) ? 'checked="checked"' : '',
           $label
@@ -236,6 +247,30 @@ class XING_Share_Settings {
       '<input type="text" placeholder="Share this article" name="xing_share[label]" value="%s" />',
       self::$options['label']
     );
+  }
+
+  private function xing_share_legacy_configuration_detected() {
+    return (self::$options['layout'] === 'default' || self::$options['layout'] === 'default-right' || self::$options['layout'] === 'default-top' || self::$options['layout'] === 'small_square');
+  }
+
+  public function display_legacy_configuration_detected_notice() {
+    global $xing_share_settings_page;
+
+    $screen = get_current_screen();
+
+    if ( $screen->id == $xing_share_settings_page )
+      add_action('admin_notices', array( XING_Share_Settings, 'xing_share_legacy_configuration_detected_notice' ));
+  }
+
+  public function xing_share_legacy_configuration_detected_notice() {
+    if ( self::xing_share_legacy_configuration_detected() === true ) { ?>
+      <div class="update-nag">
+        <p><strong>Your Share on XING plugin configuration is legacy.</strong> <br>
+          After v1.0.8 the <strong>Share on XING</strong> plugin supports new and updated button layouts. You should select the one that best supports your needs on the <a href="<?php print admin_url( 'options-general.php?page=xing-share-settings' ); ?>">plugin settings page</a>.<br>
+          In the meantime, the plugin is still displayed properly to your readers.
+        </p>
+      </div><?php
+    }
   }
 
 }
