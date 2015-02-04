@@ -61,12 +61,13 @@ class XING_Share_Settings {
     global $xing_share_settings_page;
 
     // This page will be under "Settings"
-    $xing_share_settings_page = add_options_page(
+    $xing_share_settings_page = add_menu_page(
       'Share on XING settings',
       'Share on XING',
       'manage_options',
       'xing-share-settings',
-      array( XING_Share_Settings, 'create_admin_page' )
+      array( XING_Share_Settings, 'create_admin_page' ),
+      'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+DQo8c3ZnDQogICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciDQogICB3aWR0aD0iMjAiDQogICBoZWlnaHQ9IjIwIj4NCiAgPGcNCiAgICAgdHJhbnNmb3JtPSJtYXRyaXgoMC4xOTYwMDMwNywwLDAsMC4xOTY1OTIzNSw0LC0xODkuODg2MzYpIg0KICAgICBzdHlsZT0iZmlsbDojZmZmZmZmIj4NCiAgICA8cGF0aA0KICAgICAgIGQ9Im0gNTIuMTI1LDk3Ni4wNjIxOCBjIC0xLjYsMCAtMi40LDEgLTIuOSwyLjEgMCwwIC0yMy43LDQyLjAwMDAyIC0yNC41LDQzLjQwMDAyIDAsMC4xIDE1LjYsMjguNyAxNS42LDI4LjcgMC41LDEgMS40LDIuMSAzLjEsMi4xIGggMTEgYyAwLjcsMCAxLjIsLTAuMiAxLjUsLTAuNyAwLjMsLTAuNSAwLjMsLTEuMSAwLC0xLjcgbCAtMTUuNSwtMjguMyBjIDAsMCAwLC0wLjEgMCwtMC4xIGwgMjQuNCwtNDMuMTAwMDIgYyAwLjMsLTAuNiAwLjMsLTEuMiAwLC0xLjcgLTAuMywtMC41IC0wLjgsLTAuNyAtMS41LC0wLjcgaCAtMTEuMiB6Ig0KICAgICAgIHN0eWxlPSJmaWxsOiNmZmZmZmYiIC8+DQogICAgPHBhdGgNCiAgICAgICBkPSJtIDUuOTI1LDk5MS4xNjIxOCBjIC0wLjcsMCAtMS4yLDAuMyAtMS41LDAuNyAtMC4zLDAuNSAtMC4zLDEuMSAwLDEuNyBsIDcuNSwxMi44MDAwMiBjIDAsMCAwLDAuMSAwLDAuMSBsIC0xMS43LDIwLjYgYyAtMC4zLDAuNiAtMC4zLDEuMiAwLDEuNyAwLjMsMC41IDAuOCwwLjcgMS41LDAuNyBoIDExIGMgMS42LDAgMi40LC0xLjEgMi45LC0yLjEgMCwwIDExLjUsLTIwLjIgMTEuOSwtMjEgMCwtMC4xIC03LjYsLTEzLjIwMDAyIC03LjYsLTEzLjIwMDAyIC0wLjUsLTEgLTEuNCwtMi4xIC0zLjEsLTIuMSBoIC0xMC45IHoiDQogICAgICAgc3R5bGU9ImZpbGw6I2ZmZmZmZiIgLz4NCiAgPC9nPg0KPC9zdmc+DQo='
     );
 
     add_action( 'admin_enqueue_scripts', array( XING_Share_Settings, 'xing_share_settings_static_files' ) );
