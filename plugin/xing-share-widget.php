@@ -2,7 +2,7 @@
 
 class XING_Share_Widget extends WP_Widget {
 
-  const DEFAULT_LAYOUT = "default-right";
+  const DEFAULT_LAYOUT = "share-right";
 
   const DEFAULT_LANGUAGE = "en";
 
