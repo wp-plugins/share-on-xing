@@ -18,15 +18,15 @@ class XING_Share_Settings {
   );
 
   public static $layout_options = array(
-    "share" => "Rectangular with no counter",
-    "share-top" => "Rectangular with counter on top",
-    "share-right" => "Rectangular with counter on the right",
-    "xing" => "Rectangular with no counter",
-    "xing-top" => "Rectangular with counter on top",
-    "xing-right" => "Rectangular with counter on the right",
-    "square"  => "Square with no counter",
+    "share-right" => "\"Share\" label with counter on the right",
+    "share-top" => "\"Share\" label with counter on top",
+    "share" => "\"Share\" label with no counter",
+    "xing-right" => "\"XING\" label with counter on the right",
+    "xing-top" => "\"XING\" label with counter on top",
+    "xing" => "\"XING\" label with no counter",
+    "square-right" => "Square with counter on the right",
     "square-top" => "Square with counter on top",
-    "square-right" => "Square with counter on the right"
+    "square"  => "Square with no counter"
   );
 
   public static $language_options = array(
@@ -36,7 +36,7 @@ class XING_Share_Settings {
 
   private static $defaults = array(
     'position' => 'before',
-    'layout' => 'xing',
+    'layout' => 'share-right',
     'language' => 'en'
   );
 
@@ -80,9 +80,9 @@ class XING_Share_Settings {
 
     if ($hook == $xing_share_settings_page) {
       wp_register_script( 'xing-share-settings-javascripts', plugins_url( 'static/js/settings.js', __FILE__ ), ['jquery'] );
-      wp_register_style( 'xing-share-settings-styles', plugins_url( 'static/css/settings.css', __FILE__ ) );
-
       wp_enqueue_script( 'xing-share-settings-javascripts' );
+
+      wp_register_style( 'xing-share-settings-styles', plugins_url( 'static/css/settings.css', __FILE__ ) );
       wp_enqueue_style( 'xing-share-settings-styles' );
     }
   }
@@ -267,8 +267,8 @@ class XING_Share_Settings {
     if ( self::xing_share_legacy_configuration_detected() === true ) { ?>
       <div class="update-nag">
         <p><strong>Your Share on XING plugin configuration is legacy.</strong> <br>
-          After v1.0.8 the <strong>Share on XING</strong> plugin supports new and updated button layouts. You should select the one that best supports your needs on the <a href="<?php print admin_url( 'options-general.php?page=xing-share-settings' ); ?>">plugin settings page</a>.<br>
-          In the meantime, the plugin is still displayed properly to your readers.
+          After v1.0.8 the <strong>Share on XING</strong> plugin supports new and updated button layouts. You should select the one that best supports your needs bellow.<br>
+          The plugin is still displayed properly to your visitors until you do so.
         </p>
       </div><?php
     }
