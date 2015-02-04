@@ -88,7 +88,7 @@ And always feel free to contact us!
 * Configuration page is now available on the main menu
 
 = 1.0.8 and 1.0.9 =
-* Implements the new XING Share Button
+* Implement the new XING Share Button
 * Extends plugin configuration options to support new plugin features
 * Fixes Settings page on older Wordpress versions
 
