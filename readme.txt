@@ -3,7 +3,7 @@ Contributors: gastonsalg
 Tags: XING, share, social plugin, page, post, home, sidebar, widget, opengraph, newsfeed
 Requires at least: 3.4
 Tested up to: 4.1
-Stable tag: 1.0.10
+Stable tag: 1.0.11
 License: GPLv2
 License URI: license.txt
 

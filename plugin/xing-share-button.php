@@ -2,8 +2,6 @@
 
 class XING_Share_Button {
 
-  const DEFAULT_COUNTER = 'no_count';
-
   private $configuration = array();
 
   public function __construct( $options ) {

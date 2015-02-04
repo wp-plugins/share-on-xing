@@ -3,7 +3,7 @@
  * Plugin Name: Share on XING
  * Plugin URI: https://dev.xing.com/plugins/share_button
  * Description: A plugin that allows you to easily integrate the XING Share button on any Wordpress based website.
- * Version: 1.0.10
+ * Version: 1.0.11
  * Author: Gaston Salgueiro
  * Author URI: https://www.xing.com/profile/Gaston_SalgueiroIglesias
  * License: GPLv2
@@ -47,9 +47,8 @@ class XING_Share_Loader {
   }
 
   public function register_js() {
-    global $xing_share_loader;
     wp_register_script( 'xing-share-script', 'https://www.xing-share.com/plugins/share.js', array(), null, true );
-    add_filter('script_loader_src', array( $xing_share_loader, 'async_script_loader_src' ), 1, 2);
+    add_filter('script_loader_src', array( &$this, 'async_script_loader_src' ), 1, 2);
   }
 
   public function register_css() {
@@ -102,8 +101,6 @@ class XING_Share_Loader {
 }
 
 function xing_share_loader_init() {
-  global $xing_share_loader;
-
   $xing_share_loader = new XING_Share_Loader();
 }
 
