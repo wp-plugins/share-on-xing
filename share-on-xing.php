@@ -3,7 +3,7 @@
  * Plugin Name: Share on XING
  * Plugin URI: https://dev.xing.com/plugins/share_button
  * Description: A plugin that allows you to easily integrate the XING Share button on any Wordpress based website.
- * Version: 1.0.11
+ * Version: 1.0.12
  * Author: Gaston Salgueiro
  * Author URI: https://www.xing.com/profile/Gaston_SalgueiroIglesias
  * License: GPLv2
@@ -35,8 +35,7 @@ class XING_Share_Loader {
         XING_Share_Settings::init();
       }
     } else {
-      add_action( 'wp_enqueue_scripts', array( &$this, 'register_js' ) );
-      add_action( 'wp_enqueue_scripts', array( &$this, 'register_css' ) );
+      add_action( 'wp_enqueue_scripts', array( &$this, 'enqueue_static_files' ) );
       add_action( 'wp', array( &$this, 'xing_share_public_init' ) );
     }
 
@@ -46,14 +45,12 @@ class XING_Share_Loader {
       register_widget( 'XING_Share_Widget' );
   }
 
-  public function register_js() {
+  public function enqueue_static_files() {
     wp_register_script( 'xing-share-script', 'https://www.xing-share.com/plugins/share.js', array(), null, true );
     add_filter('script_loader_src', array( &$this, 'async_script_loader_src' ), 1, 2);
-  }
 
-  public function register_css() {
-    wp_register_style( 'xing-share-css', plugins_url( 'xing-share/static/css/styles.css' ) );
-		wp_enqueue_style( 'xing-share-css' );
+    wp_register_style( 'xing-share-css', plugins_url( 'static/css/styles.css', __FILE__ ) );
+    wp_enqueue_style( 'xing-share-css' );
   }
 
   public function enqueue_js() {

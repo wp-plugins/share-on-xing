@@ -3,7 +3,7 @@ Contributors: gastonsalg
 Tags: XING, share, social plugin, page, post, home, sidebar, widget, opengraph, newsfeed
 Requires at least: 3.4
 Tested up to: 4.1
-Stable tag: 1.0.11
+Stable tag: 1.0.12
 License: GPLv2
 License URI: license.txt
 
@@ -84,11 +84,17 @@ And always feel free to contact us!
 
 == Changelog ==
 
+= 1.0.12 =
+* Fixes styling for the label displayed next to the button
+
+= 1.0.11 =
+* Minor improvements and fixes
+
 = 1.0.10 =
 * Configuration page is now available on the main menu
 
 = 1.0.8 and 1.0.9 =
-* Implement the new XING Share Button
+* Implements the new XING Share Button
 * Extends plugin configuration options to support new plugin features
 * Fixes Settings page on older Wordpress versions
 
