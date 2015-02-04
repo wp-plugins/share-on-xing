@@ -48,13 +48,13 @@ class XING_Share_Loader {
 
   public function register_js() {
     global $xing_share_loader;
-    wp_register_script( 'xing-share-script', 'https://www.xing-share.com/js/external/share.js', array(), null, true );
+    wp_register_script( 'xing-share-script', 'https://www.xing-share.com/plugins/share.js', array(), null, true );
     add_filter('script_loader_src', array( $xing_share_loader, 'async_script_loader_src' ), 1, 2);
   }
 
   public function register_css() {
-    wp_register_style( 'my-plugin', plugins_url( 'xing-share/static/css/styles.css' ) );
-		wp_enqueue_style( 'my-plugin' );
+    wp_register_style( 'xing-share-css', plugins_url( 'xing-share/static/css/styles.css' ) );
+		wp_enqueue_style( 'xing-share-css' );
   }
 
   public function enqueue_js() {
