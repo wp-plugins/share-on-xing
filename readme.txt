@@ -15,7 +15,7 @@ This plugin enables the XING Share button on your Wordpress website. It allows t
 
 = The XING Share plugin =
 
-The main feature of this plugin allows you to include the Xing Share button on your posts and pages. You'll find all the configuration options under `Settings > Share on XING` on your WP Admin.
+The main feature of this plugin allows you to include the XING Share button on your posts and pages. You'll find all the configuration options under the `Share on XING` item on your WP Admin.
 You can decide where to show the button (Home page, posts and/or pages), it's position, pick your favourite layout and set a fix URL to be shared.
 
 = XING Share widget =
