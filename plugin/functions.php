@@ -39,6 +39,8 @@ function xing_the_content_share_button( $content ) {
 
   $button_options['lang'] = $options['language'];
 
+  $button_options['follow-url'] = $options['follow-url'];
+
   $wrappedButton = xing_wrap_button_with_container( $options['label'], xing_get_share_button( $button_options ) );
 
   if ( $options['position'] === 'before' ) {

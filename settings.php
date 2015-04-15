@@ -18,15 +18,12 @@ class XING_Share_Settings {
   );
 
   public static $layout_options = array(
-    "share" => "Rectangular with no counter",
-    "share-top" => "Rectangular with counter on top",
-    "share-right" => "Rectangular with counter on the right",
-    "xing" => "Rectangular with no counter",
-    "xing-top" => "Rectangular with counter on top",
-    "xing-right" => "Rectangular with counter on the right",
-    "square"  => "Square with no counter",
+    "share-right" => "\"Share\" label with counter on the right",
+    "share-top" => "\"Share\" label with counter on top",
+    "share" => "\"Share\" label with no counter",
+    "square-right" => "Square with counter on the right",
     "square-top" => "Square with counter on top",
-    "square-right" => "Square with counter on the right"
+    "square"  => "Square with no counter"
   );
 
   public static $language_options = array(
@@ -36,7 +33,7 @@ class XING_Share_Settings {
 
   private static $defaults = array(
     'position' => 'before',
-    'layout' => 'xing',
+    'layout' => 'share-right',
     'language' => 'en'
   );
 
@@ -66,8 +63,7 @@ class XING_Share_Settings {
       'Share on XING',
       'manage_options',
       'xing-share-settings',
-      array( XING_Share_Settings, 'create_admin_page' ),
-      'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+DQo8c3ZnDQogICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciDQogICB3aWR0aD0iMjAiDQogICBoZWlnaHQ9IjIwIj4NCiAgPGcNCiAgICAgdHJhbnNmb3JtPSJtYXRyaXgoMC4xOTYwMDMwNywwLDAsMC4xOTY1OTIzNSw0LC0xODkuODg2MzYpIg0KICAgICBzdHlsZT0iZmlsbDojZmZmZmZmIj4NCiAgICA8cGF0aA0KICAgICAgIGQ9Im0gNTIuMTI1LDk3Ni4wNjIxOCBjIC0xLjYsMCAtMi40LDEgLTIuOSwyLjEgMCwwIC0yMy43LDQyLjAwMDAyIC0yNC41LDQzLjQwMDAyIDAsMC4xIDE1LjYsMjguNyAxNS42LDI4LjcgMC41LDEgMS40LDIuMSAzLjEsMi4xIGggMTEgYyAwLjcsMCAxLjIsLTAuMiAxLjUsLTAuNyAwLjMsLTAuNSAwLjMsLTEuMSAwLC0xLjcgbCAtMTUuNSwtMjguMyBjIDAsMCAwLC0wLjEgMCwtMC4xIGwgMjQuNCwtNDMuMTAwMDIgYyAwLjMsLTAuNiAwLjMsLTEuMiAwLC0xLjcgLTAuMywtMC41IC0wLjgsLTAuNyAtMS41LC0wLjcgaCAtMTEuMiB6Ig0KICAgICAgIHN0eWxlPSJmaWxsOiNmZmZmZmYiIC8+DQogICAgPHBhdGgNCiAgICAgICBkPSJtIDUuOTI1LDk5MS4xNjIxOCBjIC0wLjcsMCAtMS4yLDAuMyAtMS41LDAuNyAtMC4zLDAuNSAtMC4zLDEuMSAwLDEuNyBsIDcuNSwxMi44MDAwMiBjIDAsMCAwLDAuMSAwLDAuMSBsIC0xMS43LDIwLjYgYyAtMC4zLDAuNiAtMC4zLDEuMiAwLDEuNyAwLjMsMC41IDAuOCwwLjcgMS41LDAuNyBoIDExIGMgMS42LDAgMi40LC0xLjEgMi45LC0yLjEgMCwwIDExLjUsLTIwLjIgMTEuOSwtMjEgMCwtMC4xIC03LjYsLTEzLjIwMDAyIC03LjYsLTEzLjIwMDAyIC0wLjUsLTEgLTEuNCwtMi4xIC0zLjEsLTIuMSBoIC0xMC45IHoiDQogICAgICAgc3R5bGU9ImZpbGw6I2ZmZmZmZiIgLz4NCiAgPC9nPg0KPC9zdmc+DQo='
+      array( XING_Share_Settings, 'create_admin_page' ), 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+DQo8c3ZnDQogICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciDQogICB3aWR0aD0iMjAiDQogICBoZWlnaHQ9IjIwIj4NCiAgPGcNCiAgICAgdHJhbnNmb3JtPSJtYXRyaXgoMC4xOTYwMDMwNywwLDAsMC4xOTY1OTIzNSw0LC0xODkuODg2MzYpIg0KICAgICBzdHlsZT0iZmlsbDojZmZmZmZmIj4NCiAgICA8cGF0aA0KICAgICAgIGQ9Im0gNTIuMTI1LDk3Ni4wNjIxOCBjIC0xLjYsMCAtMi40LDEgLTIuOSwyLjEgMCwwIC0yMy43LDQyLjAwMDAyIC0yNC41LDQzLjQwMDAyIDAsMC4xIDE1LjYsMjguNyAxNS42LDI4LjcgMC41LDEgMS40LDIuMSAzLjEsMi4xIGggMTEgYyAwLjcsMCAxLjIsLTAuMiAxLjUsLTAuNyAwLjMsLTAuNSAwLjMsLTEuMSAwLC0xLjcgbCAtMTUuNSwtMjguMyBjIDAsMCAwLC0wLjEgMCwtMC4xIGwgMjQuNCwtNDMuMTAwMDIgYyAwLjMsLTAuNiAwLjMsLTEuMiAwLC0xLjcgLTAuMywtMC41IC0wLjgsLTAuNyAtMS41LC0wLjcgaCAtMTEuMiB6Ig0KICAgICAgIHN0eWxlPSJmaWxsOiNmZmZmZmYiIC8+DQogICAgPHBhdGgNCiAgICAgICBkPSJtIDUuOTI1LDk5MS4xNjIxOCBjIC0wLjcsMCAtMS4yLDAuMyAtMS41LDAuNyAtMC4zLDAuNSAtMC4zLDEuMSAwLDEuNyBsIDcuNSwxMi44MDAwMiBjIDAsMCAwLDAuMSAwLDAuMSBsIC0xMS43LDIwLjYgYyAtMC4zLDAuNiAtMC4zLDEuMiAwLDEuNyAwLjMsMC41IDAuOCwwLjcgMS41LDAuNyBoIDExIGMgMS42LDAgMi40LC0xLjEgMi45LC0yLjEgMCwwIDExLjUsLTIwLjIgMTEuOSwtMjEgMCwtMC4xIC03LjYsLTEzLjIwMDAyIC03LjYsLTEzLjIwMDAyIC0wLjUsLTEgLTEuNCwtMi4xIC0zLjEsLTIuMSBoIC0xMC45IHoiDQogICAgICAgc3R5bGU9ImZpbGw6I2ZmZmZmZiIgLz4NCiAgPC9nPg0KPC9zdmc+DQo='
     );
 
     add_action( 'admin_enqueue_scripts', array( XING_Share_Settings, 'xing_share_settings_static_files' ) );
@@ -80,9 +76,9 @@ class XING_Share_Settings {
 
     if ($hook == $xing_share_settings_page) {
       wp_register_script( 'xing-share-settings-javascripts', plugins_url( 'static/js/settings.js', __FILE__ ), ['jquery'] );
-      wp_register_style( 'xing-share-settings-styles', plugins_url( 'static/css/settings.css', __FILE__ ) );
-
       wp_enqueue_script( 'xing-share-settings-javascripts' );
+
+      wp_register_style( 'xing-share-settings-styles', plugins_url( 'static/css/settings.css', __FILE__ ) );
       wp_enqueue_style( 'xing-share-settings-styles' );
     }
   }
@@ -169,6 +165,14 @@ class XING_Share_Settings {
       'xing-share-settings',
       'xing_share_general'
     );
+
+    add_settings_field(
+      'xing_share_follow_url',
+      'URL to follow',
+      array( XING_Share_Settings, 'xing_share_follow_url_callback' ),
+      'xing-share-settings',
+      'xing_share_general'
+    );
   }
 
   public function xing_share_display_on_callback()
@@ -205,7 +209,11 @@ class XING_Share_Settings {
   public function xing_share_layout_callback()
   {
     if ( ! isset( self::$options['layout'] ) )
-      self::$options['layout'] = self::$defaults['layout']; ?>
+      self::$options['layout'] = self::$defaults['layout'];
+    else
+      // v1.0.13 removes all 'XING' label options since they are not supported by the plugin anymore
+      // This line is added for backwards compatibility
+      self::$options['layout'] = str_replace('xing', 'share', self::$options['layout']); ?>
     <fieldset>
         <ul class="xing-share-layout-options"><?php
           foreach ( self::$layout_options as $layout => $description ) {
@@ -244,10 +252,16 @@ class XING_Share_Settings {
 
   public function xing_share_label_callback()
   {
-    printf(
-      '<input type="text" placeholder="Share this article" name="xing_share[label]" value="%s" />',
-      self::$options['label']
-    );
+    printf( '<input type="text" placeholder="Share this article" name="xing_share[label]" value="%s" class="regular-text" />', self::$options['label'] );
+    print( '<p class="description">Displays a label next to the button.</p>' );
+  }
+
+  public function xing_share_follow_url_callback()
+  { ?>
+    <fieldset><?php
+      printf( '<input type="text" placeholder="https://www.xing.com/news/pages/marketing-werbung-44" name="xing_share[follow-url]" value="%s" class="regular-text" />', self::$options['follow-url'] );
+      print( '<p class="description">Optional. Includes a <a href="https://dev.xing.com/plugins/share_button/docs#follow-integration" target="_blank">Follow button</a> on the success page displayed after sharing.<br>Must be a valid XING News or Company page to be followed, otherwise it will be ignored.</p>' ); ?>
+    </fieldset><?php
   }
 
   private function xing_share_legacy_configuration_detected() {
@@ -267,8 +281,8 @@ class XING_Share_Settings {
     if ( self::xing_share_legacy_configuration_detected() === true ) { ?>
       <div class="update-nag">
         <p><strong>Your Share on XING plugin configuration is legacy.</strong> <br>
-          After v1.0.8 the <strong>Share on XING</strong> plugin supports new and updated button layouts. You should select the one that best supports your needs on the <a href="<?php print admin_url( 'options-general.php?page=xing-share-settings' ); ?>">plugin settings page</a>.<br>
-          In the meantime, the plugin is still displayed properly to your readers.
+          After v1.0.8 the <strong>Share on XING</strong> plugin supports new and updated button layouts. You should select the one that best supports your needs bellow.<br>
+          The plugin is still displayed properly to your visitors until you do so.
         </p>
       </div><?php
     }
