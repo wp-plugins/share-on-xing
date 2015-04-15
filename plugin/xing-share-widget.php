@@ -65,13 +65,15 @@ class XING_Share_Widget extends WP_Widget {
     $instance = wp_parse_args( (array) $instance, array(
       'title' => '',
       'url' => '',
-      'layout' => 'no_count-default'
+      'layout' => 'no_count-default',
+      'follow-url' => ''
     ) );
 
     $this->display_title( $instance['title'] );
     $this->display_layout( $instance['layout'] );
     $this->display_language( $instance['lang'] );
     $this->display_url( $instance['url'] );
+    $this->display_follow_url( $instance['follow-url'] );
 
   }
 
@@ -96,6 +98,9 @@ class XING_Share_Widget extends WP_Widget {
 
     if ( ! empty( $new_instance['layout'] ) )
       $instance['layout'] = strip_tags( $new_instance['layout'] );
+
+    if ( ! empty( $new_instance['follow-url'] ) )
+      $instance['follow-url'] = strip_tags( $new_instance['follow-url'] );
 
     return $instance;
   }
@@ -157,5 +162,15 @@ class XING_Share_Widget extends WP_Widget {
       } ?>
       </select>
     </p> <?php
+  }
+
+  public function display_follow_url( $existing_value = '' ) {
+    echo '<p><label>URL to follow: <input type="url" id="' . $this->get_field_id( 'follow-url' ) . '" name="' . $this->get_field_name( 'follow-url' ) . '" class="widefat"';
+    if ( $existing_value )
+      echo ' value="' . esc_url( $existing_value, array( 'http', 'https' ) ) . '"';
+
+    echo ' /></label></p>';
+
+    echo '<p class="description">' . esc_html( __( 'Optional. URL for the Follow button displayed on the success page after sharing. Must be a valid XING News or Company page URL.', 'xing' ) ) . '</p>';
   }
 }

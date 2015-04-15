@@ -3,7 +3,7 @@ Contributors: gastonsalg
 Tags: XING, share, social plugin, page, post, home, sidebar, widget, opengraph, newsfeed
 Requires at least: 3.4
 Tested up to: 4.1
-Stable tag: 1.0.12
+Stable tag: 1.1.0
 License: GPLv2
 License URI: license.txt
 
@@ -36,24 +36,23 @@ With counters
 
 * `share-top` rectangular shape, "Share"/"Teilen" labeled, with counter balloon on top
 * `share-right` rectangular shape, "Share"/"Teilen" labeled, with counter balloon on the right
-* `xing-top` rectangular shape, "XING" labeled, with counter balloon on top
-* `xing-right` rectangular shape, "XING" labeled, with counter balloon on the right
 * `square-top` square shape, no label, with counter balloon on top
 * `square-right` square shape, no label, with counter balloon on the right
 
 Without counters
 
 * `share` rectangular shape, "Share"/"Teilen" labeled
-* `xing` rectangular shape, "XING" labeled
 * `square` square shape, no label
 
 The `lang` option defines the language in which the information shown by the button is displayed. Default value is `en` (English), can be set to `de` (German).
 
 The `url` option defines the URL to be shared when clicking the button. Needs to be a valid URL. Current URL is used if none is provided.
 
+The `follow_url` option sets the URL of the XING News or Company page for the [Follow button](https://dev.xing.com/plugins/follow) displayed on the success page after sharing.
+
 Here’s a full example:
 
-`[xing_share layout="default-top" lang="de" url="https://wordpress.org/plugins/share-on-xing/"]`
+`[xing_share layout="share-top" lang="de" url="https://wordpress.org/plugins/share-on-xing/" follow_url="https://www.xing.com/news/pages/marketing-werbung-44"]`
 
 = Contributing =
 
@@ -83,6 +82,12 @@ And always feel free to contact us!
 2. XING Share applied on a post
 
 == Changelog ==
+
+= 1.1.0 =
+* Adds support to render the [Follow plugin](https://dev.xing.com/plugins/follow) on the success page displayed after sharing
+
+= 1.0.13 (Internal) =
+* Removes the 'XING' label options since the plugin does not support them anymore
 
 = 1.0.12 =
 * Fixes styling for the label displayed next to the button
