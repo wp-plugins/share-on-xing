@@ -1,9 +1,9 @@
-.xing-share-bar {
+.xing-social-plugins {
   color: #666;
   margin: 0.3em 0 0.6em;
 }
 
-.xing-share-bar > iframe {
+.xing-social-plugins > iframe {
   margin-left: 0.3em;
-  vertical-align: top;
+  vertical-align: bottom;
 }

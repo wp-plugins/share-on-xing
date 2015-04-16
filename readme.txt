@@ -1,4 +1,4 @@
-=== Share on XING ===
+=== XING for WordPress ===
 Contributors: gastonsalg
 Tags: XING, share, social plugin, page, post, home, sidebar, widget, opengraph, newsfeed
 Requires at least: 3.4
@@ -7,20 +7,20 @@ Stable tag: 1.1.0
 License: GPLv2
 License URI: license.txt
 
-Embed the XING Share Button on your Wordpress website without any hassle. Allow your visitors to share your content on their XING newsfeed.
+Embed the XING Share Button and the Follow Button on your Wordpress website without any hassle. Allow your visitors to share your content on their XING newsfeed and Follow your News or Company page on XING.
 
 == Description ==
 
-This plugin enables the XING Share Button on your Wordpress website. It allows to include the button on your home page, pages and/or posts. It also enables a widget and a handy shortcode.
+This plugin enables the XING Share Button and the Follow Button on your Wordpress website. It allows to include the buttons on your home page, pages and/or posts. It also enables widgets and handy shortcodes.
 
-= The XING Share plugin =
+= XING Share button =
 
-The main feature of this plugin allows you to include the XING Share Button on your posts and pages. You'll find all the configuration options under the `Share on XING` menu option on your WP Admin interface.
-You can decide where to show the button (Home page, posts and/or pages), it's position, pick your favourite layout and set a fix URL to be shared.
+The main feature of this plugin allows you to include the XING Share Button on your posts and pages. You'll find all the configuration options under the `XING for WP` menu option on your WP Admin interface.
+You can decide where to show the button -home page, posts and/or pages-, it's position, and pick your favourite layout.
 
 = XING Share widget =
 
-This plugins includes a widget to easily display the XING Share Button on any widget area your current Theme enables.
+This plugin includes a widget to easily display the XING Share Button on any widget area your current Theme enables.
 
 = XING Share shortcode =
 
@@ -54,6 +54,14 @@ Here’s a full example:
 
 `[xing_share layout="share-top" lang="de" url="https://wordpress.org/plugins/share-on-xing/" follow_url="https://www.xing.com/news/pages/marketing-werbung-44"]`
 
+= XING Follow button =
+
+It is now possible to configure the XING Follow button to allow your visitors to follow your News or Company page on XING. It can be displayed next to the Share button on the blog's home, posts and/or pages, next to the Share button.
+
+= Follow on XING widget =
+
+This plugin includes a widget to easily display the XING Follow Button on any widget area your current Theme enables.
+
 = Contributing =
 
 The source code of this plugin can be found on this [GitHub account](https://github.com/gastonsalg/share-on-xing.git).
@@ -82,6 +90,11 @@ And always feel free to contact us!
 2. XING Share applied on a post
 
 == Changelog ==
+
+= 1.2.0 =
+* Renamed to 'XING for WordPress'
+* Extended with the [Follow plugin](https://dev.xing.com/plugins/follow)
+* Includes the Follow on XING widget
 
 = 1.1.0 =
 * Adds support to render the [Follow plugin](https://dev.xing.com/plugins/follow) on the success page displayed after sharing

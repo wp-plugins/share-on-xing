@@ -59,8 +59,8 @@ class XING_Share_Settings {
 
     // This page will be under "Settings"
     $xing_share_settings_page = add_menu_page(
-      'Share on XING settings',
-      'Share on XING',
+      'XING for Wordpress Settings',
+      'XING for WP',
       'manage_options',
       'xing-share-settings',
       array( XING_Share_Settings, 'create_admin_page' ), 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+DQo8c3ZnDQogICB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciDQogICB3aWR0aD0iMjAiDQogICBoZWlnaHQ9IjIwIj4NCiAgPGcNCiAgICAgdHJhbnNmb3JtPSJtYXRyaXgoMC4xOTYwMDMwNywwLDAsMC4xOTY1OTIzNSw0LC0xODkuODg2MzYpIg0KICAgICBzdHlsZT0iZmlsbDojZmZmZmZmIj4NCiAgICA8cGF0aA0KICAgICAgIGQ9Im0gNTIuMTI1LDk3Ni4wNjIxOCBjIC0xLjYsMCAtMi40LDEgLTIuOSwyLjEgMCwwIC0yMy43LDQyLjAwMDAyIC0yNC41LDQzLjQwMDAyIDAsMC4xIDE1LjYsMjguNyAxNS42LDI4LjcgMC41LDEgMS40LDIuMSAzLjEsMi4xIGggMTEgYyAwLjcsMCAxLjIsLTAuMiAxLjUsLTAuNyAwLjMsLTAuNSAwLjMsLTEuMSAwLC0xLjcgbCAtMTUuNSwtMjguMyBjIDAsMCAwLC0wLjEgMCwtMC4xIGwgMjQuNCwtNDMuMTAwMDIgYyAwLjMsLTAuNiAwLjMsLTEuMiAwLC0xLjcgLTAuMywtMC41IC0wLjgsLTAuNyAtMS41LC0wLjcgaCAtMTEuMiB6Ig0KICAgICAgIHN0eWxlPSJmaWxsOiNmZmZmZmYiIC8+DQogICAgPHBhdGgNCiAgICAgICBkPSJtIDUuOTI1LDk5MS4xNjIxOCBjIC0wLjcsMCAtMS4yLDAuMyAtMS41LDAuNyAtMC4zLDAuNSAtMC4zLDEuMSAwLDEuNyBsIDcuNSwxMi44MDAwMiBjIDAsMCAwLDAuMSAwLDAuMSBsIC0xMS43LDIwLjYgYyAtMC4zLDAuNiAtMC4zLDEuMiAwLDEuNyAwLjMsMC41IDAuOCwwLjcgMS41LDAuNyBoIDExIGMgMS42LDAgMi40LC0xLjEgMi45LC0yLjEgMCwwIDExLjUsLTIwLjIgMTEuOSwtMjEgMCwtMC4xIC03LjYsLTEzLjIwMDAyIC03LjYsLTEzLjIwMDAyIC0wLjUsLTEgLTEuNCwtMi4xIC0zLjEsLTIuMSBoIC0xMC45IHoiDQogICAgICAgc3R5bGU9ImZpbGw6I2ZmZmZmZiIgLz4NCiAgPC9nPg0KPC9zdmc+DQo='
@@ -97,12 +97,12 @@ class XING_Share_Settings {
   */
   public function create_admin_page() { ?>
     <div class="wrap">
-      <h2>Share on XING</h2>
-      <p>Allow your visitors share your posts and pages on their XING newsfeed with one click.</p>
-      <form method="post" action="options.php"><?php
-        settings_fields( 'xing_share_options' );
-        do_settings_sections( 'xing-share-settings' );
-        submit_button(); ?>
+      <h2>XING for WordPress</h2>
+      <form method="post" action="options.php">
+        <?php
+          settings_fields( 'xing_share_options' );
+          do_settings_sections( 'xing-share-settings' );
+          submit_button(); ?>
       </form>
     </div><?php
   }
@@ -120,18 +120,32 @@ class XING_Share_Settings {
     );
 
     add_settings_section(
-      'xing_share_general', // ID
-      null, // Title
+      'xing_general', // ID
+      'General settings', // Title
+      function() { return; }, // Callback
+      'xing-share-settings' // Page
+    );
+
+    add_settings_section(
+      'xing_share', // ID
+      'Share on XING settings', // Title
+      function() { return; }, // Callback
+      'xing-share-settings' // Page
+    );
+
+    add_settings_section(
+      'xing_follow', // ID
+      'Follow on XING settings', // Title
       function() { return; }, // Callback
       'xing-share-settings' // Page
     );
 
     add_settings_field(
       'xing_share_display_on', // ID
-      'Display on', // Title
+      'Display buttons on', // Title
       array( XING_Share_Settings, 'xing_share_display_on_callback' ), // Callback
       'xing-share-settings', // Page
-      'xing_share_general' // Section
+      'xing_general' // Section
     );
 
     add_settings_field(
@@ -139,15 +153,7 @@ class XING_Share_Settings {
       'Position',
       array( XING_Share_Settings, 'xing_share_position_callback' ),
       'xing-share-settings',
-      'xing_share_general'
-    );
-
-    add_settings_field(
-      'xing_share_layout',
-      'Button layout',
-      array( XING_Share_Settings, 'xing_share_layout_callback' ),
-      'xing-share-settings',
-      'xing_share_general'
+      'xing_general'
     );
 
     add_settings_field(
@@ -155,7 +161,7 @@ class XING_Share_Settings {
       'Language',
       array( XING_Share_Settings, 'xing_share_language_callback' ),
       'xing-share-settings',
-      'xing_share_general'
+      'xing_general'
     );
 
     add_settings_field(
@@ -163,7 +169,7 @@ class XING_Share_Settings {
       'Label',
       array( XING_Share_Settings, 'xing_share_label_callback' ),
       'xing-share-settings',
-      'xing_share_general'
+      'xing_general'
     );
 
     add_settings_field(
@@ -171,7 +177,31 @@ class XING_Share_Settings {
       'URL to follow',
       array( XING_Share_Settings, 'xing_share_follow_url_callback' ),
       'xing-share-settings',
-      'xing_share_general'
+      'xing_general'
+    );
+
+    add_settings_field(
+      'xing_share_layout',
+      'Button layout',
+      array( XING_Share_Settings, 'xing_share_layout_callback' ),
+      'xing-share-settings',
+      'xing_share'
+    );
+
+    add_settings_field(
+      'xing_follow_enabled',
+      'Follow button',
+      array( XING_Share_Settings, 'xing_follow_enabled_callback' ),
+      'xing-share-settings',
+      'xing_follow'
+    );
+
+    add_settings_field(
+      'xing_follow_counter',
+      'Button layout',
+      array( XING_Share_Settings, 'xing_follow_counter_callback' ),
+      'xing-share-settings',
+      'xing_follow'
     );
   }
 
@@ -217,12 +247,10 @@ class XING_Share_Settings {
     <fieldset>
         <ul class="xing-share-layout-options"><?php
           foreach ( self::$layout_options as $layout => $description ) {
-            $selected = false;
-            if ( self::$options['layout'] == $layout) {
-              $selected = true;
-            }
+            $selected = ( self::$options['layout'] == $layout ) ? true : false;
+
             printf(
-              '<li class="xing-share-layout-option %s %s"><label><input type="radio" name="xing_share[layout]" value="%s" %s /> %s</label></li>',
+              '<li class="xing-share-layout-option %s %s"><label><input type="radio" name="xing_share[layout]" value="%s" %s/> %s</label></li>',
               $layout,
               ($selected) ? 'selected' : '',
               $layout,
@@ -260,8 +288,18 @@ class XING_Share_Settings {
   { ?>
     <fieldset><?php
       printf( '<input type="text" placeholder="https://www.xing.com/news/pages/marketing-werbung-44" name="xing_share[follow-url]" value="%s" class="regular-text" />', self::$options['follow-url'] );
-      print( '<p class="description">Optional. Includes a <a href="https://dev.xing.com/plugins/share_button/docs#follow-integration" target="_blank">Follow button</a> on the success page displayed after sharing.<br>Must be a valid XING News or Company page to be followed, otherwise it will be ignored.</p>' ); ?>
+      print( '<p class="description">When set, a <a href="https://dev.xing.com/plugins/follow" target="_blank">Follow button</a> is included on the <a href="https://dev.xing.com/plugins/share_button/docs#follow-integration" target="_blank">success page</a> displayed after sharing.<br>If the Follow button is activated on the settings below, it will be set to follow this URL as well.<br>Note that it must be a valid <a href="https://www.xing.com/news/pages/" target="_blank">XING News</a> or <a href="https://www.xing.com/companies" target="_blank">XING Companies</a> page\'s URL, otherwise it will be ignored.</p>' ); ?>
     </fieldset><?php
+  }
+
+  public function xing_follow_enabled_callback() {
+    printf( '<label><input type="checkbox" name="xing_share[follow_enabled]" value="true" %s /> Display the Follow button</label>', (self::$options['follow_enabled'] == 'true') ? 'checked="checked"' : '' );
+    print( '<p class="description">Includes a <a href="https://dev.xing.com/plugins/follow" target="_blank">Follow button</a> next to the Share button, matching the selected layout.<br> Requires the <strong>URL to follow</strong> parameter in the <strong>General settings</strong> section to be set and valid.</p>' );
+  }
+
+  public function xing_follow_counter_callback() {
+    printf( '<label><input type="checkbox" name="xing_share[follow_counter]" value="right" %s /> Show the followers counter</label>', (!empty(self::$options['follow_counter'])) ? 'checked="checked"' : '' );
+    print( '<p class="description">Displays a balloon next to the button which shows the current amount of followers.</p>' );
   }
 
   private function xing_share_legacy_configuration_detected() {

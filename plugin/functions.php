@@ -18,6 +18,24 @@ function xing_get_share_button( $options = array() ) {
   return '';
 }
 
+function xing_get_follow_button( $options = array() ) {
+  if ( ! class_exists( 'XING_Follow_Button' ) ) {
+    require_once( dirname(__FILE__) . '/xing-follow-button.php' );
+  }
+
+  $follow_button = new XING_Follow_Button( $options );
+
+  if ( !$follow_button )
+    return null;
+
+  $html = $follow_button->asHTML();
+
+  if ($html)
+    return "\n" . $html . "\n";
+
+  return '';
+}
+
 function xing_the_content_share_button( $content ) {
   global $post;
 
@@ -33,33 +51,43 @@ function xing_the_content_share_button( $content ) {
   if ( ! isset( $options['display_on'] ) )
     return $content;
 
-  $button_options['layout'] = $options['layout'];
+  $share_button_options['layout'] = $options['layout'];
 
-  $button_options['url'] = get_permalink( $post->ID );
+  $share_button_options['url'] = get_permalink( $post->ID );
 
-  $button_options['lang'] = $options['language'];
+  $share_button_options['lang'] = $options['language'];
 
-  $button_options['follow-url'] = $options['follow-url'];
+  $share_button_options['follow-url'] = $options['follow-url'];
 
-  $wrappedButton = xing_wrap_button_with_container( $options['label'], xing_get_share_button( $button_options ) );
+  if ( $options['follow_enabled'] === 'true' && isset($options['follow-url']) ) {
+    $follow_button_options['url'] = $options['follow-url'];
+
+    $follow_button_options['lang'] = $options['language'];
+
+    if ( !empty( $options['follow_counter'] ) ) {
+      $follow_button_options['counter'] = 'right';
+    }
+  }
+
+  $wrappedButtons = xing_wrap_button_with_container( $options['label'], xing_get_share_button( $share_button_options ), xing_get_follow_button( $follow_button_options ) );
 
   if ( $options['position'] === 'before' ) {
-    return $wrappedButton . $content;
+    return $wrappedButtons . $content;
   } else if ( $options['position'] === 'after' ) {
-    return $content . $wrappedButton;
+    return $content . $wrappedButtons;
   } else if ( $options['position'] === 'both' ) {
-    return $wrappedButton . $content . $wrappedButton;
+    return $wrappedButtons . $content . $wrappedButtons;
   }
 
   // don't break the filter
   return $content;
 }
 
-function xing_wrap_button_with_container( $label = null, $button ) {
-  $html = '<div class="xing-share-bar">';
+function xing_wrap_button_with_container( $label = null, $share_button, $follow_button = null ) {
+  $html = '<div class="xing-share-bar xing-social-plugins">';
   if ( isset($label) )
     $html .= $label;
-  $html .= $button . '</div>';
+  $html .= $share_button . $follow_button . '</div>';
 
   return $html;
 }
