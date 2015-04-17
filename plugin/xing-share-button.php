@@ -2,8 +2,6 @@
 
 class XING_Share_Button {
 
-  const DEFAULT_COUNTER = 'no_count';
-
   private $configuration = array();
 
   public function __construct( $options ) {
@@ -15,20 +13,20 @@ class XING_Share_Button {
   public function asHTML() {
     $html = '<div data-platform="wordpress" ';
 
-    if ( isset( $this->configuration['shape'] ) )
+    if ( !empty( $this->configuration['shape'] ) )
       $html .= 'data-shape="'. $this->configuration['shape'] .'" ';
 
-    if ( isset( $this->configuration['counter'] ) )
+    if ( !empty( $this->configuration['counter'] ) )
       $html .= 'data-counter="' . $this->configuration['counter'] . '" ';
 
-    if ( isset( $this->configuration['label'] ) )
-      $html .= 'data-label="' . $this->configuration['label'] . '" ';
-
-    if ( isset( $this->configuration['lang'] ) )
+    if ( !empty($this->configuration['lang']) )
       $html .= 'data-lang="'. $this->configuration['lang'] .'" ';
 
-    if ( isset( $this->configuration['url'] ) )
+    if ( !empty( $this->configuration['url'] ) )
       $html .= 'data-url="'. $this->configuration['url'] .'" ';
+
+    if ( !empty( $this->configuration['follow-url'] ) )
+      $html .= 'data-follow-url="'. $this->configuration['follow-url'] .'" ';
 
     $html .= 'data-type="xing/share"></div>';
 
@@ -37,13 +35,9 @@ class XING_Share_Button {
 
   private function getConfigFrom( $options = array() ) {
     if ( isset( $options['layout'] ) ) {
-
       $config = explode('-', $options['layout']);
 
-      if ($config[0] === "share")
-        $options['label'] = $config[0];
-
-      else if ($config[0] === "square")
+      if ($config[0] === "square")
         $options['shape'] = $config[0];
 
       if (isset($config[1]))
@@ -60,13 +54,13 @@ class XING_Share_Button {
 
       switch($options['layout']) {
         case "default-top":
-          $options['layout'] = "xing-top";
+          $options['layout'] = "share-top";
           break;
         case "default-right":
-          $options['layout'] = "xing-right";
+          $options['layout'] = "share-right";
           break;
         case "default":
-          $options['layout'] = "xing";
+          $options['layout'] = "share";
           break;
         case "small_square":
           $options['layout'] = "square";
