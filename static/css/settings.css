@@ -39,26 +39,14 @@
 }
 
 .xing-share-layout-option.square-right {
-  background-position: -1210px 0;
-}
-
-.xing-share-layout-option.square-top {
-  background-position: -1100px 0;
-}
-
-.xing-share-layout-option.square {
-  background-position: -990px 0;
-}
-
-.xing-share-layout-option.xing-right {
   background-position: -880px 0;
 }
 
-.xing-share-layout-option.xing-top {
+.xing-share-layout-option.square-top {
   background-position: -770px 0;
 }
 
-.xing-share-layout-option.xing {
+.xing-share-layout-option.square {
   background-position: -660px 0;
 }
 
