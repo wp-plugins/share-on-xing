@@ -7,7 +7,7 @@ Stable tag: 1.2.3
 License: GPLv2
 License URI: license.txt
 
-Embed the XING Share Button and the Follow Button on your Wordpress website without any hassle. Allow your visitors to share your content on their XING newsfeed and Follow your News or Company page on XING.
+Embed the XING Share Button and the Follow Button on your Wordpress website without any hassle.
 
 == Description ==
 
