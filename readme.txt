@@ -3,7 +3,7 @@ Contributors: gastonsalg
 Tags: XING, share, social, page, post, home, sidebar, widget, opengraph, newsfeed, follow, shortcode
 Requires at least: 3.4
 Tested up to: 4.1
-Stable tag: 1.2.3
+Stable tag: 1.2.4
 License: GPLv2
 License URI: license.txt
 
@@ -70,8 +70,8 @@ Pull requests, code discussions and features requests are more than welcome!
 == Installation ==
 
 1. Install the plugin either via the WordPress.org plugin directory, or by uploading the files to your server (in the `/wp-content/plugins/` directory).
-1. You should be able to start using the XING Share Button after enabling the plugin. Check available configuration options under the `Share on XING` menu option in your WP Admin interface.
-1. No further actions are needed! Check the Appearance > Widgets section to find out more about the widget and take a look at the shortcode documentation
+1. You should be able to start using the XING Share Button and the Follow button after enabling the plugin. Check available configuration options under the `XING for WP` menu option in your WordPress Admin interface.
+1. No further actions are needed! Check the Appearance > Widgets section to find out more about the widget and take a look at the shortcode documentation.
 
 == Frequently Asked Questions ==
 
@@ -81,8 +81,8 @@ The XING Share Button uses the Open Graph tags on your page header to gather the
 
 = Further questions? =
 
-You will find more information about the XING Share Button and other plugins in the official [Developer Portal](https://dev.xing.com/).
-And always feel free to contact us!
+You will find more information about the XING Share Button, the Follow button and other plugins in the official [Developer Portal](https://dev.xing.com/).
+Always feel free to contact us!
 
 == Screenshots ==
 
@@ -90,6 +90,9 @@ And always feel free to contact us!
 2. XING Share applied on a post
 
 == Changelog ==
+
+= 1.2.4 =
+* Minor documentation updates
 
 = 1.2.3 =
 * Prevents the Follow button from being activated if no or an invalid 'URL to follow' value is provided
