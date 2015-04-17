@@ -3,7 +3,7 @@
  * Plugin Name: XING for WordPress
  * Plugin URI: https://dev.xing.com/plugins/
  * Description: A plugin that allows you to easily integrate the XING Share button and the Follow button on any Wordpress based website.
- * Version: 1.2.2
+ * Version: 1.2.3
  * Author: Gaston Salgueiro
  * Author URI: https://www.xing.com/profile/Gaston_SalgueiroIglesias
  * License: GPLv2

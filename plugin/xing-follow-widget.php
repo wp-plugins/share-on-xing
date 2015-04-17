@@ -107,7 +107,7 @@ class XING_Follow_Widget extends WP_Widget {
     echo '<p><label>URL to follow: <input type="url" id="' . $this->get_field_id( 'url' ) . '" name="' . $this->get_field_name( 'url' ) . '" class="widefat"';
     if ( $existing_value )
       echo ' value="' . esc_url( $existing_value, array( 'http', 'https' ) ) . '"';
-    echo ' placeholder="https://www.xing.com/news/pages/marketing-werbung-44" /></label></p>';
+    echo ' placeholder="https://www.xing.com/company/xing" /></label></p>';
 
     echo '<p class="description">' . esc_html( __( 'Must be a valid XING News or Company page.', 'xing' ) ) . '</p>';
   }

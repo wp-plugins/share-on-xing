@@ -3,7 +3,7 @@ Contributors: gastonsalg
 Tags: XING, share, social plugin, page, post, home, sidebar, widget, opengraph, newsfeed
 Requires at least: 3.4
 Tested up to: 4.1
-Stable tag: 1.2.2
+Stable tag: 1.2.3
 License: GPLv2
 License URI: license.txt
 
@@ -91,15 +91,22 @@ And always feel free to contact us!
 
 == Changelog ==
 
-= 1.2.0 =
+= 1.2.3 =
+* Prevents the Follow button from being activated if no or an invalid 'URL to follow' value is provided
+* Minor improvements
+
+= 1.2.2 =
 * Renamed to 'XING for WordPress'
 * Extended with the [Follow plugin](https://dev.xing.com/plugins/follow)
 * Includes the Follow on XING widget
 
+= 1.2.0 & 1.2.1 =
+* Broken releases due to missing files.
+
 = 1.1.0 =
 * Adds support to render the [Follow plugin](https://dev.xing.com/plugins/follow) on the success page displayed after sharing
 
-= 1.0.13 (Internal) =
+= 1.0.13 (Internal release) =
 * Removes the 'XING' label options since the plugin does not support them anymore
 
 = 1.0.12 =
@@ -111,7 +118,7 @@ And always feel free to contact us!
 = 1.0.10 =
 * Configuration page is now available on the main menu
 
-= 1.0.8 and 1.0.9 =
+= 1.0.8 & 1.0.9 =
 * Implements the new XING Share Button
 * Extends plugin configuration options to support new plugin features
 * Fixes Settings page on older Wordpress versions
@@ -131,7 +138,7 @@ And always feel free to contact us!
 = 1.0.3 =
 * Fixes plugin installation through WP Admin plugins manager
 
-= 1.0.1 and 1.0.2 =
+= 1.0.1 & 1.0.2 =
 * Minor documentation improvements
 
 = 1.0 =

@@ -57,10 +57,10 @@ function xing_the_content_share_button( $content ) {
 
   $share_button_options['lang'] = $options['language'];
 
-  $share_button_options['follow-url'] = $options['follow-url'];
+  $share_button_options['follow-url'] = ( $options['is_valid_follow_url'] ) ? $options['follow_url'] : null;
 
-  if ( $options['follow_enabled'] === 'true' && isset($options['follow-url']) ) {
-    $follow_button_options['url'] = $options['follow-url'];
+  if ( $options['follow_enabled'] === 'true' && $options['is_valid_follow_url'] ) {
+    $follow_button_options['url'] = $options['follow_url'];
 
     $follow_button_options['lang'] = $options['language'];
 

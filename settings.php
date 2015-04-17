@@ -53,8 +53,7 @@ class XING_Share_Settings {
   /**
   * Add options page
   */
-  public function add_plugin_page()
-  {
+  public function add_plugin_page() {
     global $xing_share_settings_page;
 
     // This page will be under "Settings"
@@ -98,6 +97,7 @@ class XING_Share_Settings {
   public function create_admin_page() { ?>
     <div class="wrap">
       <h2>XING for WordPress</h2>
+      <?php settings_errors(); ?>
       <form method="post" action="options.php">
         <?php
           settings_fields( 'xing_share_options' );
@@ -107,8 +107,175 @@ class XING_Share_Settings {
     </div><?php
   }
 
-  public function sanitize( $input ) {
-    return $input;
+  public function xing_sanitize_settings( $options ) {
+
+    $news_page_prefix = 'https://www.xing.com/news/pages/';
+    $companies_page_prefix = 'https://www.xing.com/companies/';
+    $companiy_page_prefix = 'https://www.xing.com/company/';
+
+    $options['is_valid_follow_url'] = true;
+
+    if ( empty( $options['follow_url'] ) ) {
+      $options['is_valid_follow_url'] = false;
+    } else if (
+      substr($options['follow_url'], 0, strlen($news_page_prefix)) !== $news_page_prefix &&
+      substr($options['follow_url'], 0, strlen($companies_page_prefix)) !== $companies_page_prefix &&
+      substr($options['follow_url'], 0, strlen($companiy_page_prefix)) !== $companiy_page_prefix
+    ) {
+      unset($options['follow_enabled']);
+      $options['is_valid_follow_url'] = false;
+
+      $error_message = 'The "URL to follow" value does not seem to be a valid XING News nor Company page URL and will be ignored.';
+
+      add_settings_error(
+        'xing_invalid_follow_url_error',
+        esc_attr( 'xing_share_errors' ),
+        $error_message
+      );
+    }
+
+    if ( $options['follow_enabled'] === 'true' && !$options['is_valid_follow_url'] ) {
+      unset($options['follow_enabled']);
+
+      $error_message = 'The Follow button cannot be enabled without providing a valid "URL to follow" value in the General settings.';
+
+      add_settings_error(
+        'xing_follow_cannot_be_enabled_error',
+        esc_attr( 'xing_share_errors' ),
+        $error_message
+      );
+    }
+
+    return $options;
+  }
+
+  public function xing_general_settings_callback() {
+    echo '<p>These settings apply to both Share and Follow buttons.</p>';
+  }
+
+  public function xing_share_settings_callback() {
+    echo '<p>Customize how the Share on XING button looks.</p>';
+  }
+
+  public function xing_follow_settings_callback() {
+    echo '<p>Enable and customize the Follow on XING button.</p>';
+  }
+
+  public function xing_share_display_on_callback() { ?>
+    <fieldset><?php
+      foreach ( self::$display_on_options as $key => $label ) {
+        printf(
+          '<label><input type="checkbox" name="xing_share[display_on][%s]" value="%s" %s /> %s</label>',
+          $key,
+          true,
+          (self::$options['display_on'][$key] == true) ? 'checked="checked"' : '',
+          $label
+        );
+      } ?>
+    </fieldset><?php
+  }
+
+  public function xing_share_position_callback() {
+    if ( ! isset( self::$options['position'] ) )
+      self::$options['position'] = self::$defaults['position']; ?>
+    <select name="xing_share[position]"><?php
+      foreach ( self::$position_options as $key => $label ) {
+        printf(
+          '<option value="%s" %s>%s</option>',
+          $key,
+          ( self::$options['position'] === $key ) ? 'selected="selected"' : '',
+          $label
+        );
+      } ?>
+    </select><?php
+  }
+
+  public function xing_share_layout_callback() {
+    if ( ! isset( self::$options['layout'] ) )
+      self::$options['layout'] = self::$defaults['layout'];
+    else
+      // v1.0.13 removes all 'XING' label options since they are not supported by the plugin anymore
+      // This line is added for backwards compatibility
+      self::$options['layout'] = str_replace('xing', 'share', self::$options['layout']); ?>
+    <fieldset>
+        <ul class="xing-share-layout-options"><?php
+          foreach ( self::$layout_options as $layout => $description ) {
+            $selected = ( self::$options['layout'] == $layout ) ? true : false;
+
+            printf(
+              '<li class="xing-share-layout-option %s %s"><label><input type="radio" name="xing_share[layout]" value="%s" %s/> %s</label></li>',
+              $layout,
+              ($selected) ? 'selected' : '',
+              $layout,
+              ($selected) ? 'checked="checked"' : '',
+              $layout
+            );
+          } ?>
+        </ul>
+    </fieldset><?php
+  }
+
+  public function xing_share_language_callback() {
+    if ( ! isset( self::$options['language'] ) )
+      self::$options['language'] = self::$defaults['language']; ?>
+    <fieldset><?php
+      foreach ( self::$language_options as $lang => $label ) {
+        printf(
+          '<label><input type="radio" class="xing-share-language-option" value="%s" %s name="xing_share[language]">%s</label>',
+          $lang,
+          ( self::$options['language'] == $lang ) ? 'checked="checked"' : '',
+          $label
+        );
+      } ?>
+    </fieldset><?php
+  }
+
+  public function xing_share_label_callback() {
+    printf( '<input type="text" placeholder="Share this article" name="xing_share[label]" value="%s" class="regular-text" />', self::$options['label'] );
+    print( '<p class="description">Displays a label next to the button.</p>' );
+  }
+
+  public function xing_share_follow_url_callback() { ?>
+    <fieldset><?php
+      printf( '<input type="text" placeholder="https://www.xing.com/company/xing" name="xing_share[follow_url]" value="%s" class="regular-text" />', self::$options['follow_url'] );
+      print( '<p class="description">When set, a <a href="https://dev.xing.com/plugins/follow" target="_blank">Follow button</a> is included on the <a href="https://dev.xing.com/plugins/share_button/docs#follow-integration" target="_blank">success page</a> displayed after sharing.<br>If the Follow button is activated on the settings below, it will be set to follow this URL as well.<br>Note that it must be a valid <a href="https://www.xing.com/news/pages/" target="_blank">XING News</a> or <a href="https://www.xing.com/companies" target="_blank">XING Companies</a> page\'s URL, otherwise it will be ignored.</p>' ); ?>
+    </fieldset><?php
+  }
+
+  public function xing_follow_enabled_callback() {
+
+    printf( '<label><input type="checkbox" name="xing_share[follow_enabled]" value="true" %s /> Display the Follow button</label>', (self::$options['follow_enabled'] === 'true') ? 'checked="checked"' : '' );
+    print( '<p class="description">Includes a <a href="https://dev.xing.com/plugins/follow" target="_blank">Follow button</a> next to the Share button, matching the selected layout.<br> Requires the <strong>URL to follow</strong> parameter in the <strong>General settings</strong> section to be set and valid.</p>' );
+  }
+
+  public function xing_follow_counter_callback() {
+
+    printf( '<label><input type="checkbox" name="xing_share[follow_counter]" value="right" %s /> Show the followers counter</label>', (!empty(self::$options['follow_counter'])) ? 'checked="checked"' : '' );
+    print( '<p class="description">Displays a balloon next to the button which shows the current amount of followers.</p>' );
+  }
+
+  private function xing_share_legacy_configuration_detected() {
+    return (self::$options['layout'] === 'default' || self::$options['layout'] === 'default-right' || self::$options['layout'] === 'default-top' || self::$options['layout'] === 'small_square');
+  }
+
+  public function display_legacy_configuration_detected_notice() {
+    global $xing_share_settings_page;
+
+    $screen = get_current_screen();
+
+    if ( $screen->id == $xing_share_settings_page )
+      add_action('admin_notices', array( XING_Share_Settings, 'xing_share_legacy_configuration_detected_notice' ));
+  }
+
+  public function xing_share_legacy_configuration_detected_notice() {
+    if ( self::xing_share_legacy_configuration_detected() === true ) { ?>
+      <div class="update-nag">
+        <p><strong>Your Share on XING plugin configuration is legacy.</strong> <br>
+          After v1.0.8 the <strong>Share on XING</strong> plugin supports new and updated button layouts. You should select the one that best supports your needs bellow.<br>
+          The plugin is still displayed properly to your visitors until you do so.
+        </p>
+      </div><?php
+    }
   }
 
   public function page_init() {
@@ -116,27 +283,27 @@ class XING_Share_Settings {
     register_setting(
       'xing_share_options', // Option group
       'xing_share', // Option name
-      array( XING_Share_Settings, 'sanitize' )
+      array( XING_Share_Settings, 'xing_sanitize_settings' )
     );
 
     add_settings_section(
       'xing_general', // ID
       'General settings', // Title
-      function() { return; }, // Callback
+      array( XING_Share_Settings, 'xing_general_settings_callback'), // Callback
       'xing-share-settings' // Page
     );
 
     add_settings_section(
       'xing_share', // ID
       'Share on XING settings', // Title
-      function() { return; }, // Callback
+      array( XING_Share_Settings, 'xing_share_settings_callback'), // Callback
       'xing-share-settings' // Page
     );
 
     add_settings_section(
       'xing_follow', // ID
       'Follow on XING settings', // Title
-      function() { return; }, // Callback
+      array( XING_Share_Settings, 'xing_follow_settings_callback'), // Callback
       'xing-share-settings' // Page
     );
 
@@ -203,127 +370,6 @@ class XING_Share_Settings {
       'xing-share-settings',
       'xing_follow'
     );
-  }
-
-  public function xing_share_display_on_callback()
-  { ?>
-    <fieldset><?php
-      foreach ( self::$display_on_options as $key => $label ) {
-        printf(
-          '<label><input type="checkbox" name="xing_share[display_on][%s]" value="%s" %s /> %s</label>',
-          $key,
-          true,
-          (self::$options['display_on'][$key] == true) ? 'checked="checked"' : '',
-          $label
-        );
-      } ?>
-    </fieldset><?php
-  }
-
-  public function xing_share_position_callback()
-  {
-    if ( ! isset( self::$options['position'] ) )
-      self::$options['position'] = self::$defaults['position']; ?>
-    <select name="xing_share[position]"><?php
-      foreach ( self::$position_options as $key => $label ) {
-        printf(
-          '<option value="%s" %s>%s</option>',
-          $key,
-          ( self::$options['position'] === $key ) ? 'selected="selected"' : '',
-          $label
-        );
-      } ?>
-    </select><?php
-  }
-
-  public function xing_share_layout_callback()
-  {
-    if ( ! isset( self::$options['layout'] ) )
-      self::$options['layout'] = self::$defaults['layout'];
-    else
-      // v1.0.13 removes all 'XING' label options since they are not supported by the plugin anymore
-      // This line is added for backwards compatibility
-      self::$options['layout'] = str_replace('xing', 'share', self::$options['layout']); ?>
-    <fieldset>
-        <ul class="xing-share-layout-options"><?php
-          foreach ( self::$layout_options as $layout => $description ) {
-            $selected = ( self::$options['layout'] == $layout ) ? true : false;
-
-            printf(
-              '<li class="xing-share-layout-option %s %s"><label><input type="radio" name="xing_share[layout]" value="%s" %s/> %s</label></li>',
-              $layout,
-              ($selected) ? 'selected' : '',
-              $layout,
-              ($selected) ? 'checked="checked"' : '',
-              $layout
-            );
-          } ?>
-        </ul>
-    </fieldset><?php
-  }
-
-  public function xing_share_language_callback()
-  {
-    if ( ! isset( self::$options['language'] ) )
-      self::$options['language'] = self::$defaults['language']; ?>
-    <fieldset><?php
-      foreach ( self::$language_options as $lang => $label ) {
-        printf(
-          '<label><input type="radio" class="xing-share-language-option" value="%s" %s name="xing_share[language]">%s</label>',
-          $lang,
-          ( self::$options['language'] == $lang ) ? 'checked="checked"' : '',
-          $label
-        );
-      } ?>
-    </fieldset><?php
-  }
-
-  public function xing_share_label_callback()
-  {
-    printf( '<input type="text" placeholder="Share this article" name="xing_share[label]" value="%s" class="regular-text" />', self::$options['label'] );
-    print( '<p class="description">Displays a label next to the button.</p>' );
-  }
-
-  public function xing_share_follow_url_callback()
-  { ?>
-    <fieldset><?php
-      printf( '<input type="text" placeholder="https://www.xing.com/news/pages/marketing-werbung-44" name="xing_share[follow-url]" value="%s" class="regular-text" />', self::$options['follow-url'] );
-      print( '<p class="description">When set, a <a href="https://dev.xing.com/plugins/follow" target="_blank">Follow button</a> is included on the <a href="https://dev.xing.com/plugins/share_button/docs#follow-integration" target="_blank">success page</a> displayed after sharing.<br>If the Follow button is activated on the settings below, it will be set to follow this URL as well.<br>Note that it must be a valid <a href="https://www.xing.com/news/pages/" target="_blank">XING News</a> or <a href="https://www.xing.com/companies" target="_blank">XING Companies</a> page\'s URL, otherwise it will be ignored.</p>' ); ?>
-    </fieldset><?php
-  }
-
-  public function xing_follow_enabled_callback() {
-    printf( '<label><input type="checkbox" name="xing_share[follow_enabled]" value="true" %s /> Display the Follow button</label>', (self::$options['follow_enabled'] == 'true') ? 'checked="checked"' : '' );
-    print( '<p class="description">Includes a <a href="https://dev.xing.com/plugins/follow" target="_blank">Follow button</a> next to the Share button, matching the selected layout.<br> Requires the <strong>URL to follow</strong> parameter in the <strong>General settings</strong> section to be set and valid.</p>' );
-  }
-
-  public function xing_follow_counter_callback() {
-    printf( '<label><input type="checkbox" name="xing_share[follow_counter]" value="right" %s /> Show the followers counter</label>', (!empty(self::$options['follow_counter'])) ? 'checked="checked"' : '' );
-    print( '<p class="description">Displays a balloon next to the button which shows the current amount of followers.</p>' );
-  }
-
-  private function xing_share_legacy_configuration_detected() {
-    return (self::$options['layout'] === 'default' || self::$options['layout'] === 'default-right' || self::$options['layout'] === 'default-top' || self::$options['layout'] === 'small_square');
-  }
-
-  public function display_legacy_configuration_detected_notice() {
-    global $xing_share_settings_page;
-
-    $screen = get_current_screen();
-
-    if ( $screen->id == $xing_share_settings_page )
-      add_action('admin_notices', array( XING_Share_Settings, 'xing_share_legacy_configuration_detected_notice' ));
-  }
-
-  public function xing_share_legacy_configuration_detected_notice() {
-    if ( self::xing_share_legacy_configuration_detected() === true ) { ?>
-      <div class="update-nag">
-        <p><strong>Your Share on XING plugin configuration is legacy.</strong> <br>
-          After v1.0.8 the <strong>Share on XING</strong> plugin supports new and updated button layouts. You should select the one that best supports your needs bellow.<br>
-          The plugin is still displayed properly to your visitors until you do so.
-        </p>
-      </div><?php
-    }
   }
 
 }
