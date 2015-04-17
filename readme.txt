@@ -11,7 +11,7 @@ Embed the XING Share Button and the Follow Button on your Wordpress website with
 
 == Description ==
 
-This plugin enables the XING Share Button and the Follow Button on your Wordpress website. It allows to include the buttons on your home page, pages and/or posts. It also enables widgets and handy shortcodes.
+This plugin enables the XING Share Button and the Follow Button on your Wordpress website.
 
 = XING Share button =
 
